@@ -18,7 +18,7 @@ public class YoutrackApiWorker : IDisposable
         _httpClient?.Dispose();
     }
 
-    public async Task MoveIssueToSprint(Issue issue, string sprint)
+    public async Task MoveIssueToSprint(Issue issue, string sprint, CancellationToken ct)
     {
         var endpoint = @$"/api/issues/{issue.Id}?fields=customFields(name,value(name))";
 
@@ -38,6 +38,6 @@ public class YoutrackApiWorker : IDisposable
         var body = JsonConvert.SerializeObject(sprints);
 
         var data = new StringContent(body, Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync(endpoint, data);
+        var response = await _httpClient.PostAsync(endpoint, data, ct);
     }
 }
