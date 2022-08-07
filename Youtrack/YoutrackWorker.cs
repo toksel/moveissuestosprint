@@ -9,7 +9,7 @@ public class YourtrackWorker
         _connection = new BearerTokenConnection(baseAddress, bearerToken);
     }
 
-    public async Task<IEnumerable<Issue>> GetIssuesByFilter(string[] projectIds, string? filter)
+    public async Task<List<Issue>> GetIssuesByFilter(string[] projectIds, string? filter)
     {
         var result = new List<Issue>();
         var issueService = _connection.CreateIssuesService();
